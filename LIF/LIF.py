@@ -29,17 +29,19 @@ time    =   np.arange(0, T+dt, dt)      # step values [s]
 #############Constants###############
 #Injected current
 I0 = 1.5        #Ampère[A]
-I = np.full(len(time),I0)
+I = np.linspace(0,len(time),len(time))
+I= np.sin(0.004*I)+1
+formuleI = "I=sin(0.004*I0)+1"
 
 #Neuron electrical properties
 R = 1          #Ohm
-C = 0.1       #Farad                
+C = 0.02      #Farad                
 tau = R*C      #10 ms for a typical neuron
 
 # Impulse values in Volt [V]
 urest = -0.065
 ur = urest
-thres = 1 # thres = R*I0 for this type of plotting
+thres = R # thres = R*I0=R*1 for this type of plotting(I0 normalization=0)
 
 def LIF_num(I,R,C):
     # Voltage initialization
@@ -64,26 +66,25 @@ deltaU = u - urest
 
 
 #######Plotting#############
-
+###Tension plot#####
 fig1, ax1 = plt.subplots(1)
-#fig2, ax2 = plt.subplots(1)
 ax1.set_title('Integrate and Fire Model', )
 ax1.plot(time, deltaU/thres, color="orange")
-#ax2.plot(time, I)
-
-#Thresholdt
+ax1.set_ylabel("Δu(t)/thres", fontsize=15)
+ax1.set_xlabel("Temps [s]")
 thres_plot = np.full(len(time),thres)
 ax1.plot(time,thres_plot,'--')
-#Labels
-ax1.set_ylabel("Δu(t)/thres", fontsize=15)
-#ax2.set_ylabel("Courant [A]")
-ax1.set_xlabel("Temps [s]")
-#ax2.set_xlabel("Temps [s]")
 
-title = "figures/Tension: C=" + str(C) + ", R=" + str(R) + ",I=" + str(I0) + ".png"
+title = "figures/Tension: C=" + str(C) + ", R=" + str(R) + "," + formuleI + " avec I0=" + str(I0) + ".png"
 
 plt.savefig(title)
-
+'''
+###Courant plot###
+fig2, ax2 = plt.subplots(1)
+ax2.plot(time, I)
+ax2.set_ylabel("Courant [A]")
+ax2.set_xlabel("Temps [s]")
+'''
 plt.show()
 
 
