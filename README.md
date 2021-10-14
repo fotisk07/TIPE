@@ -6,8 +6,6 @@ Code and relative documents for the TIPE 2022 Exam. YOu can find more informatio
 
 ## License
 
-**I forbit anybody from using those algorithms for their TIPE project**
-
 **J'interdit toute utilisation de mon travail dans le cadre de l'epreuve du TIPE pour l'entrée en grande école**
 
 ## Prerequisites
