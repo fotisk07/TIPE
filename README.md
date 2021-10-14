@@ -4,6 +4,12 @@
 
 Code and relative documents for the TIPE 2022 Exam. YOu can find more information about this exam [here](https://fr.wikipedia.org/wiki/Travail_d%27initiative_personnelle_encadr%C3%A9)
 
+## License
+
+**I forbit anybody from using those algorithms for their TIPE project**
+
+**J'interdit toute utilisation de mon travail dans le cadre de l'epreuve du TIPE pour l'entrée en grande école**
+
 ## Prerequisites
 
 The Code is written in Python 3.6.5 . If you don't have Python installed you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip.
