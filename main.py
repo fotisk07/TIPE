@@ -19,9 +19,36 @@ from helper import *
 #plt.savefig("Resultats/Processed and raw signal")
 #
 
-y1 = get_single_column_data("Signaux/raw2.txt")
-time = create_time_axes(y1)
+lpfreq = 20
+rms = np.sqrt(np.mean(y1**2))
 
-plt.plot(time,y1)
-plt.show()
-plt.savefig("Raw signal 2")
+hp = signal.butter(10, 20, 'hp', fs=1000, output='sos')
+#filtered = signal.sosfilt(hp, y1)
+rectified = np.abs(y1-rms)
+
+
+lp = signal.butter(50, lpfreq, 'lp', fs=1000, output='sos')
+output = signal.sosfilt(lp,rectified)
+
+
+
+
+
+fig, (ax1, ax2) = plt.subplots(2, sharex=True)
+fig.suptitle('Raw and Rectified Signals')
+ax1.plot(time, y1)
+ax2.plot(time, rectified,'y')
+ax1.set_title("Raw signal")
+ax2.set_title("Rectified signal")
+ax2.set_xlabel("Time (ms) ")
+plt.savefig("Resultats/Filtered_and_rectified.png")
+
+
+
+fig3, ax3 = plt.subplots()
+ax3.plot(time, output,'m')
+ax3.set_title("Output signal")
+ax3.set_xlabel("time")
+name = "Resultats/Output with coupure at " + str(lpfreq) + ".png"
+
+plt.savefig(name)
